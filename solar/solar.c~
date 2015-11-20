@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<time.h>
+
+float *modelo(float *t, float a, float b, float c, float d);
+float likelihood(float *f_obs, float *f_mod);
+
+
+int main(int argc, char **argv){
+  int n_steps = atof(argv[1]);
+  int n_burn = atof(argv[2]);
+  float *a_walk = malloc(n_steps*sizeof(float));
+  float *b_walk = malloc(n_steps*sizeof(float));
+  float *c_walk = malloc(n_steps*sizeof(float));
+  float *d_walk = malloc(n_steps*sizeof(float));
+  float *l_walk = malloc(n_steps*sizeof(float));
+  srand(time(NULL));
+  a_walk[0] = rand();
+  b_walk[0] = rand();
+  c_walk[0] = rand();
+  d_walk[0] = rand();
+
+  printf("\n\na=%f , b=%f , c=%f , d=%f\n\n", a_walk[0],b_walk[0],c_walk[0],d_walk[0]);
+
+  return 0;
+}
+
+float *modelo(float *t, float a, float b, float c, float d){
+  int n = sizeof(t)/sizeof(t[0]);
+  float *f = malloc(n*sizeof(float));
+  int i;
+  for(i=0;i<n;i++)
+    f[i] = a*cos((2.0*M_PI/d)*t[i]+b)+c;
+  return f;
+}
+
+float likelihood(float *f_obs, float *f_mod){
+  int n = sizeof(f_obs)/sizeof(f_obs[0]);
+  float suma = 0;
+  int i;
+  for(i=0;i<n;i++)
+    suma += pow(f_obs[i]-f_mod[i],2);
+  return exp(-(1.0/2.0)*suma);
+}
+

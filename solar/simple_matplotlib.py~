@@ -1,0 +1,19 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = np.loadtxt('parametros.dat')
+
+#make a simple figure
+fig = plt.figure()
+ax = plt.axes()
+
+ax.set_xlabel("x")
+ax.set_ylabel("p(x)")
+ax.set_title("parametros")
+
+plt.scatter(data[:,0],data[:,1], label="Ultimo timestep")
+ax.legend()
+
+filename = 'grafica' 
+plt.savefig(filename + '.pdf',format = 'pdf', transparent=True)
+plt.close()
