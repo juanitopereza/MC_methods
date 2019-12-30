@@ -1,2 +1,2 @@
-# Tarea_7
-Ejercicios Tarea 7 Métodos computacionales 2015-2
+# Montecarlo Methods
+Excercises appliying Montecarlo methods in both C++ and python
